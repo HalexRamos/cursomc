@@ -1,5 +1,7 @@
 package com.halexramos.cursomc.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -16,6 +18,7 @@ public class Endereco implements Serializable {
     private String bairro;
     private String cep;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name="cliente_id")
     private Cliente cliente;
@@ -36,7 +39,7 @@ public class Endereco implements Serializable {
         this.bairro = bairro;
         this.cep = cep;
         this.cliente = cliente;
-        this.cidade = cidade;
+        this.setCidade(cidade);
     }
 
     public Integer getId() {
@@ -94,6 +97,8 @@ public class Endereco implements Serializable {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
+    public Cidade getCidade() { return cidade; }
 
     public void setCidade(Cidade cidade) {
         this.cidade = cidade;
